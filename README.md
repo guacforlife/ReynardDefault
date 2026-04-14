@@ -33,14 +33,13 @@ Builds land in `packages/` as `*_iphoneos-arm64.deb` (rootless) and `*_iphoneos-
 
 ## Tested Environments
 
-| iOS | Jailbreak | Variant | Status |
-|-----|-----------|---------|--------|
-| 16.3.1 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
-| 15.7.7 | Dopamine | rootless (`iphoneos-arm64`) | Working |
+| Device | iOS | Jailbreak | Variant | Status |
+|--------|-----|-----------|---------|--------|
+| iPhone 14 Pro Max | 16.3.1 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
+| iPhone 7 | 15.7.7 | Dopamine | rootless (`iphoneos-arm64`) | Working |
+| iPhone 7 Plus | 14.8.1 | Taurine 1.1.7-3 | rootful (`iphoneos-arm`) | Working |
 
-Tweak injection via ElleKit on arm64 / arm64e.
-
-The rootful variant (`iphoneos-arm`) builds cleanly but has not yet been tested on unc0ver / palera1n rootful — feedback welcome via issues.
+Tweak injection via ElleKit (rootless) or substrate (rootful) on arm64 / arm64e.
 
 ## License
 
