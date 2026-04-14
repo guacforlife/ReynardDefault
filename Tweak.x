@@ -5,7 +5,12 @@
 @property (nonatomic, copy) NSURL *URL;
 @end
 
-static NSString *const kSafariBundleID = @"com.apple.mobilesafari";
+static NSArray *const kBrowserBundleIDs = @[ 
+	@"com.apple.mobilesafari", 
+	@"org.mozilla.ios.Firefox", 
+	@"com.google.chrome.ios", 
+	@"com.brave.ios.browser" 
+]; // what else is popular...?
 static NSString *const kReynardBundleID = @"com.minh-ton.Reynard";
 static NSString *const kReynardURLScheme = @"reynard";
 
@@ -36,7 +41,7 @@ static NSURL *wrapHTTPURLForReynard(NSURL *original) {
 
 - (void)setBundleIdentifier:(NSString *)bundleIdentifier {
     loadPrefs();
-    if (enabled && [bundleIdentifier isEqualToString:kSafariBundleID]) {
+    if (enabled && [kBrowserBundleIDs containsObject:bundleIdentifier]) {
         if ([self respondsToSelector:@selector(URL)] && [self respondsToSelector:@selector(setURL:)]) {
             NSURL *wrapped = wrapHTTPURLForReynard(self.URL);
             if (wrapped) self.URL = wrapped;
