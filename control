@@ -7,3 +7,4 @@ Maintainer: guacforlife
 Author: guacforlife
 Section: Tweaks
 Depends: mobilesubstrate, preferenceloader, com.opa334.ccsupport
+Homepage: https://github.com/guacforlife/ReynardDefault

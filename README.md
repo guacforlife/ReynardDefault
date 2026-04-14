@@ -36,7 +36,7 @@ Builds land in `packages/` as `*_iphoneos-arm64.deb` (rootless) and `*_iphoneos-
 | iOS | Jailbreak | Variant | Status |
 |-----|-----------|---------|--------|
 | 16.3.1 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
-| 15.7.7 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
+| 15.7.7 | Dopamine | rootless (`iphoneos-arm64`) | Working |
 
 Tweak injection via ElleKit on arm64 / arm64e.
 
