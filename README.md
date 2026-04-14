@@ -31,17 +31,16 @@ make both       # builds both variants side-by-side
 
 Builds land in `packages/` as `*_iphoneos-arm64.deb` (rootless) and `*_iphoneos-arm.deb` (rootful). Rootless debs installed via Sileo on Roothide are auto-patched; manual installs need the Roothide Patcher app first.
 
-## Tested Environment
+## Tested Environments
 
-| Component | Version |
-|-----------|---------|
-| iOS | 16.3.1 |
-| Jailbreak | Dopamine (Roothide) — rootless |
-| Tweak injection | ElleKit |
-| Architecture | arm64 / arm64e |
-| Package schemes | rootless (`iphoneos-arm64`) + rootful (`iphoneos-arm`) |
+| iOS | Jailbreak | Variant | Status |
+|-----|-----------|---------|--------|
+| 16.3.1 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
+| 15.7.7 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
 
-Rootful variant builds cleanly but has not been tested on unc0ver / palera1n — feedback welcome via issues.
+Tweak injection via ElleKit on arm64 / arm64e.
+
+The rootful variant (`iphoneos-arm`) builds cleanly but has not yet been tested on unc0ver / palera1n rootful — feedback welcome via issues.
 
 ## License
 
