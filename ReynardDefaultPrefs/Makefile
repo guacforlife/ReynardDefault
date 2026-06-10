@@ -1,4 +1,3 @@
-export THEOS = /Users/az/theos
 BUNDLE_NAME = ReynardDefaultPrefs
 
 ReynardDefaultPrefs_FILES = RDRootVC.m
