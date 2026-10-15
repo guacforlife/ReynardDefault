@@ -1,0 +1,81 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (${{ matrix.scheme }})
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        scheme: [rootless, rootful]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential fakeroot rsync curl perl zip git libxml2 libtinfo6 unzip
+
+      - name: Setup Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
+          # The iOS toolchain is not a git submodule; it must be downloaded separately
+          curl -sL https://github.com/L1ghtmann/llvm-project/releases/latest/download/iOSToolchain-x86_64.tar.xz -o /tmp/toolchain.tar.xz
+          tar -xJf /tmp/toolchain.tar.xz -C "$HOME/theos/toolchain/"
+          "$HOME/theos/toolchain/linux/iphone/bin/clang" --version
+          curl -sL https://github.com/theos/sdks/archive/master.zip -o /tmp/sdks.zip
+          unzip -q /tmp/sdks.zip -d /tmp/sdks
+          mkdir -p "$HOME/theos/sdks"
+          mv /tmp/sdks/sdks-master/* "$HOME/theos/sdks/"
+          rm -rf /tmp/sdks /tmp/sdks.zip
+          echo "THEOS=$HOME/theos" >> "$GITHUB_ENV"
+
+      - name: Build
+        run: make ${{ matrix.scheme }}
+
+      - name: Rename packages
+        run: |
+          mkdir -p out
+          scheme="${{ matrix.scheme }}"
+          if [ "$scheme" = "rootless" ]; then tag="rootless"; else tag="rootful"; fi
+          for f in packages/*.deb; do
+            cp "$f" "out/$(basename "$f" .deb)_${tag}.deb"
+          done
+          ls -la out
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ReynardDefault-${{ matrix.scheme }}
+          path: out/*.deb
+
+  release:
+    name: Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: false
+          generate_release_notes: true
+          files: dist/*.deb

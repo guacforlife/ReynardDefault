@@ -1,4 +1,3 @@
-export THEOS = /Users/az/theos
 export ARCHS = arm64 arm64e
 export TARGET = iphone:clang:14.5:14.0
 INSTALL_TARGET_PROCESSES = SpringBoard
