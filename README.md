@@ -38,6 +38,7 @@ Builds land in `packages/` as `*_iphoneos-arm64.deb` (rootless) and `*_iphoneos-
 | iPhone 14 Pro Max | 16.3.1 | Dopamine (Roothide) | rootless (`iphoneos-arm64`) | Working |
 | iPhone 7 | 15.7.7 | Dopamine | rootless (`iphoneos-arm64`) | Working |
 | iPhone 7 Plus | 14.8.1 | Taurine 1.1.7-3 | rootful (`iphoneos-arm`) | Working |
+| iPad Pro 10.5 | 17.7.11 | palera1n | rootless (`iphoneos-arm64`) | Working | 
 
 Tweak injection via ElleKit (rootless) or substrate (rootful) on arm64 / arm64e.
 
